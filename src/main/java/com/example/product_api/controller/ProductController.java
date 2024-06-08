@@ -39,7 +39,7 @@ public class ProductController {
         }
     }
 
-    @PutMapping
+    @PutMapping(value = "/update")
     public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto) {
         ProductDto updatedProduct = productService.updateProduct(productDto);
         if (updatedProduct != null) {

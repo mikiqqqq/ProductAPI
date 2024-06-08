@@ -27,6 +27,7 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     @Override
+    @Transactional
     public OrderItem update(OrderItem orderItem) {
         orderItemRepo.updateOrderItemQuantity(orderItem.getId(), orderItem.getQuantity());
         return orderItemRepo.findById(orderItem.getId()).orElse(null);
@@ -38,11 +39,13 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     @Override
+    @Transactional
     public void deleteAll(Integer orderId) {
         orderItemRepo.deleteByOrderId(orderId);
     }
 
     @Override
+    @Transactional
     public void delete(Integer orderId, Integer itemId) {
         orderItemRepo.deleteByOrderIdAndItemId(orderId, itemId);
     }
