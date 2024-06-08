@@ -4,6 +4,7 @@ import com.example.product_api.mapper.ProductDtoMapper;
 import com.example.product_api.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.product_api.service.ProductService;
@@ -15,6 +16,7 @@ import java.util.Optional;
 @RestController
 @CrossOrigin("http://localhost:3000/")
 @RequestMapping(value = "/api/product")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class ProductController {
 
     @Autowired

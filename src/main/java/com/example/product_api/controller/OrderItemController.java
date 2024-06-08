@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @CrossOrigin("http://localhost:3000/")
 @RequestMapping(value = "/api/order-item")
+@PreAuthorize("hasRole('ADMIN')")
 public class OrderItemController {
 
     @Autowired
@@ -50,7 +52,7 @@ public class OrderItemController {
     }
 
     @DeleteMapping(value="/delete-all/{orderId}")
-    ResponseEntity<String> deletwAll(@PathVariable Integer orderId) {
+    ResponseEntity<String> deleteAll(@PathVariable Integer orderId) {
         orderItemService.deleteAll(orderId);
 
         return ResponseEntity.ok().body("deleted");
