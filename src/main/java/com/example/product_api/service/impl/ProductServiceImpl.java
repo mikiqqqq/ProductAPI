@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
         if (product.isPresent()) {
             productRepo.deleteById(productId);
         }
-        return null;
+        return productDtoMapper.toDto(product.orElse(null));
     }
 
     @Override

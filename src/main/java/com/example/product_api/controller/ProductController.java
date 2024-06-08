@@ -34,6 +34,7 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ProductDto> removeProduct(@PathVariable Integer id) {
         ProductDto removedProduct = productService.removeProduct(id);
+        System.out.println(removedProduct);
         if (removedProduct != null) {
             return ResponseEntity.ok(removedProduct);
         } else {
