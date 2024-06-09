@@ -30,7 +30,6 @@ public class OrderItemController {
 
     @PutMapping(value="/update")
     ResponseEntity<OrderItem> update(@Valid @RequestBody OrderItem orderItem) {
-
         return new ResponseEntity<>(
                 orderItemService.update(orderItem),
                 HttpStatus.CREATED
