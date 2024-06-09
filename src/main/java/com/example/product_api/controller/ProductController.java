@@ -32,9 +32,9 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ProductDto> removeProduct(@PathVariable Integer id) {
+    public ResponseEntity<ProductDto> removeProduct(@PathVariable Integer id) throws InterruptedException {
         ProductDto removedProduct = productService.removeProduct(id);
-        System.out.println(removedProduct);
+        Thread.sleep(2000);
         if (removedProduct != null) {
             return ResponseEntity.ok(removedProduct);
         } else {

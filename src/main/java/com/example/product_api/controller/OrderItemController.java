@@ -14,7 +14,6 @@ import java.util.List;
 @RestController
 @CrossOrigin("http://localhost:3000/")
 @RequestMapping(value = "/api/order-item")
-@PreAuthorize("hasRole('ADMIN')")
 public class OrderItemController {
 
     @Autowired
@@ -22,7 +21,7 @@ public class OrderItemController {
 
     @PostMapping(value="/add")
     ResponseEntity<OrderItem> add(@Valid @RequestBody OrderItem orderItem) {
-
+        System.out.println(orderItem);
         return new ResponseEntity<>(
                 orderItemService.save(orderItem),
                 HttpStatus.CREATED

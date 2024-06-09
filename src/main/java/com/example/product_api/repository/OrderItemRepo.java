@@ -7,11 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderItemRepo extends JpaRepository<OrderItem, Integer> {
     void deleteByOrderId(Integer orderId);  // Add this method
     void deleteByOrderIdAndItemId(Integer orderId, Integer itemId);
     List<OrderItem> findAllByOrderId(Integer orderId);
+    Optional<OrderItem> findByOrderIdAndItemId(Integer orderId, Integer itemId);
 
     // Custom method to update the quantity of an OrderItem
     @Modifying

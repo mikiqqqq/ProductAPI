@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderItemServiceImpl implements OrderItemService {
@@ -17,10 +18,11 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Override
     @Transactional
     public OrderItem save(OrderItem orderItem){
-        if(orderItemRepo.existsById(orderItem.getId())){
-            int updatedQuantity = orderItemRepo.getOrderItemQuantity(orderItem.getId()) + orderItem.getQuantity();
-            orderItemRepo.updateOrderItemQuantity(orderItem.getId(), updatedQuantity);
-            return orderItemRepo.findById(orderItem.getId()).orElse(null);
+        Optional<OrderItem> existsInDatabase = orderItemRepo.findByOrderIdAndItemId(orderItem.getOrderId(), orderItem.getItemId());
+        if(existsInDatabase.isPresent()){
+            int updatedQuantity = orderItemRepo.getOrderItemQuantity(existsInDatabase.get().getId()) + orderItem.getQuantity();
+            orderItemRepo.updateOrderItemQuantity(existsInDatabase.get().getId(), updatedQuantity);
+            return orderItemRepo.findById(existsInDatabase.get().getId()).orElse(null);
         } else {
             return orderItemRepo.save(orderItem);
         }
